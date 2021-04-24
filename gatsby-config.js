@@ -5,7 +5,31 @@
  */
 
 module.exports = {
-  /* Your site config here */
+  siteMetadata: {
+    title: 'Inclusive Upper Valley',
+    menuLinks:[
+      {
+        name:'home',
+        link:'/'
+      },
+      {
+        name:'about',
+        link:'/about'
+      },
+      {
+        name:'contact',
+        link:'/contact'
+      },
+      {
+        name:'support',
+        link:'/support'
+      },
+      {
+        name:'news',
+        link:'/news'
+      },
+    ]
+  },
   plugins: [
     {
       resolve: `gatsby-plugin-typography`,

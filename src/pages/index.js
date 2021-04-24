@@ -7,7 +7,7 @@ export default function Home() {
     <Layout>
       <StaticImage src="../images/logo.jpg" alt="Logo" />
       <p>
-        Here is some more detail...
+        A brief mission statement here ...
       </p>
     </Layout>
   )

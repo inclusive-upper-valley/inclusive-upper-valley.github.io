@@ -1,5 +1,7 @@
-import React from "react"
-import { Link } from "gatsby"
+import * as React from "react"
+import PropTypes from "prop-types"
+import Header from "./header"
+import { graphql, Link, useStaticQuery } from "gatsby"
 
 const ListLink = props => (
   <li style={{ display: `inline-block`, marginRight: `1rem` }}>
@@ -8,19 +10,33 @@ const ListLink = props => (
 )
 
 export default function Layout({ children }) {
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+          menuLinks {
+            name
+            link
+          }
+        }
+      }
+    }
+  `)
   return (
-    <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
-      <header style={{ marginBottom: `1.5rem` }}>
-        <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
-          <h3 style={{ display: `inline` }}>Inclusive Upper Valley</h3>
-        </Link>
+    <>
+      <Header menuLinks={data.site.siteMetadata.menuLinks} siteTitle={data.site.siteMetadata?.title}>
         <ul style={{ listStyle: `none`, float: `right` }}>
           <ListLink to="/">Home</ListLink>
           <ListLink to="/about/">About</ListLink>
           <ListLink to="/contact/">Contact</ListLink>
+          <ListLink to="/support/">Show Support</ListLink>
+          <ListLink to="/news/">News and Action</ListLink>
         </ul>
-      </header>
-      {children}
-    </div>
+      </Header>
+      <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
+        {children}
+      </div>
+    </>
   )
 }
